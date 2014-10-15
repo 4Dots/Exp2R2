@@ -1,11 +1,13 @@
 package Servlets;
 
+
 import Beans.LoginBean;
 import Servicios.ServicioLogin;
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +21,11 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        Facebook facebook = login.login();
+        
         
         try
         {
+            Facebook facebook = login.login(request, response);
             User me = facebook.getMe();
             
             System.out.println(me.getFirstName());
@@ -33,10 +36,5 @@ public class SignInServlet extends HttpServlet {
         }
         
         
-        request.getSession().setAttribute("facebook", facebook);
-        StringBuffer callbackURL = request.getRequestURL();
-        int index = callbackURL.lastIndexOf("/");
-        callbackURL.replace(index, callbackURL.length(), "").append("/callback");
-        response.sendRedirect(facebook.getOAuthAuthorizationURL(callbackURL.toString()));
     }
 }

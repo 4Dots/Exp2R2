@@ -10,12 +10,22 @@
 <tag:notloggedin>
   <a href="signin">Sign in with Facebook</a>
 </tag:notloggedin>
+  
+  <%
+      
+  %>
+  
 <tag:loggedin>
-  <h1>Welcome ${facebook.name} (${facebook.id})</h1>
+  <h1>Welcome ${facebook.name}  </h1>
   <form action="./post" method="post">
     <textarea cols="80" rows="2" name="message"></textarea>
     <input type="submit" name="post" value="statuses" />
   </form>
+  
+  <jsp:useBean id="usuario" class="Beans.LoginBean" scope="request"/>
+  <jsp:getProperty name="usuario" property="asd"/>
+  
+  
 <a href="./logout">logout</a>
 </tag:loggedin>
 </body>
