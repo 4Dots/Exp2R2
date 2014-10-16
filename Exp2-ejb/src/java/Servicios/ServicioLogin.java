@@ -31,11 +31,21 @@ public class ServicioLogin {
     
     private Usuario u;
     
+    private Facebook fb;
+    
+    private static ServicioLogin servicioLogin;
+    
     public ServicioLogin()
     {
         
     }
     
+    public static ServicioLogin getInstance(){
+        if(servicioLogin == null){
+            servicioLogin = new ServicioLogin();
+        }
+        return servicioLogin;
+    }
     
     public Facebook login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -48,31 +58,32 @@ public class ServicioLogin {
         int index = callbackURL.lastIndexOf("/");
         callbackURL.replace(index, callbackURL.length(), "").append("/callback");
         response.sendRedirect(facebook.getOAuthAuthorizationURL(callbackURL.toString()));
-        
-//        try{
-//            ArrayList<LikeU> nlik = new ArrayList();
-//            ResponseList<Like> likes =  facebook.getUserLikes();
-//            for (int i = 0; i < likes.size(); i++)
-//            {
-//               Like l = likes.get(i);
-//               if (l.getCategory().equals("Clothing"))
-//               {
-//                   LikeU nl = new LikeU(l.getName(), l.getCategory());
-//                   nlik.add(nl);
-//               }
-//            }
-//            
-//            User me = facebook.getMe();
-//            
-//            ResponseList<Friend> amigos =  facebook.getFriends();
-//            ArrayList<Friend> am = (ArrayList<Friend>) amigos;
-//            
-//            u = new Usuario(nlik, me.getId(), me.getName(), am);
-//        }
-//        catch(Exception e)
-//        {
-//           e.printStackTrace();
-//        }
+       
+        try{
+            ArrayList<LikeU> nlik = new ArrayList();
+            ResponseList<Like> likes =  facebook.getUserLikes();
+            for (int i = 0; i < likes.size(); i++)
+            {
+               Like l = likes.get(i);
+               if (l.getCategory().equals("Clothing"))
+               {
+                   LikeU nl = new LikeU(l.getName(), l.getCategory());
+                   nlik.add(nl);
+               }
+            }
+            
+            User me = facebook.getMe();
+            
+            ResponseList<Friend> amigos =  facebook.getFriends();
+            ArrayList<Friend> am = (ArrayList<Friend>) amigos;
+            
+            u = new Usuario(nlik, me.getId(), me.getName(), am);
+        }
+        catch(Exception e)
+        {
+           e.printStackTrace();
+        }
+        fb = facebook;
         return facebook;
     }
     
@@ -81,4 +92,34 @@ public class ServicioLogin {
         return u;
     }
     
+    public Usuario buscarUsuario(){
+        Usuario usu = null;
+        ArrayList<LikeU> nlik = new ArrayList();
+        
+        try{
+            ResponseList<Like> likes =  fb.getUserLikes();
+            for (int i = 0; i < likes.size(); i++)
+            {
+               Like l = likes.get(i);
+               if (l.getCategory().equals("Clothing"))
+               {
+                   LikeU nl = new LikeU(l.getName(), l.getCategory());
+                   nlik.add(nl);
+               }
+            }
+            
+            User me = fb.getMe();
+            
+            ResponseList<Friend> amigos =  fb.getFriends();
+            ArrayList<Friend> am = (ArrayList<Friend>) amigos;
+            
+            usu = new Usuario(nlik, me.getId(), me.getName(), am);
+        }
+        catch(Exception e)
+        {
+           e.printStackTrace();
+        }
+            
+        return usu;    
+    }
 }

@@ -14,6 +14,7 @@ import facebook4j.User;
 import facebook4j.internal.http.HttpRequest;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
@@ -36,9 +37,11 @@ public class LoginBean implements Serializable{
 
     protected Facebook fb;
     
-    private ServicioLogin servicio;
+    private static ServicioLogin servicio;
     protected String asd;
-
+    
+    private static LoginBean loginB;
+    
     public String getAsd() {
         try {
             asd = fb.getName();
@@ -55,7 +58,7 @@ public class LoginBean implements Serializable{
     
     public LoginBean()
     {
-        servicio = new ServicioLogin();                
+          servicio = new ServicioLogin();                
     }
     
     public Facebook login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FacebookException
@@ -65,6 +68,12 @@ public class LoginBean implements Serializable{
         //asd = "huehue";
         //u = servicio.getUser();
         return fb;
+    }
+    
+    public Usuario buscarUsuario(){
+        u = servicio.getUser();
+        System.out.println(u);
+        return u;
     }
     
     public Usuario getU() {
@@ -83,4 +92,16 @@ public class LoginBean implements Serializable{
         this.user = user;
     }
     
+    public static ServicioLogin getInstance(){
+        return servicio.getInstance();
+    }
+    
+    public static LoginBean getLoginBeanIns(){
+        if(loginB == null){
+            loginB = new LoginBean();
+           
+        }
+        servicio = getInstance();
+        return loginB;
+    }
 }

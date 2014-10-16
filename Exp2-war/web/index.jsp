@@ -22,6 +22,11 @@
     <input type="submit" name="post" value="statuses" />
   </form>
   
+   <form action="./maybe" method="post">
+    <input type="submit" name="maybe" value="Likes" />
+  </form>
+
+  
   <jsp:useBean id="usuario" class="Beans.LoginBean" scope="request"/>
   <jsp:getProperty name="usuario" property="asd"/>
   
