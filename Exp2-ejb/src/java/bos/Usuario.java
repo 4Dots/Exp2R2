@@ -8,26 +8,53 @@ package bos;
 
 import facebook4j.Friend;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
  * @author estudiante
  */
+
+@Entity
+@NamedQueries(@NamedQuery(name="Usuario.findAll", query="select o from Usuario o"))
 public class Usuario {
     
-    private ArrayList<LikeU> likes;
+    //Atributos
+    
+    @Id
+   // @Column(name="USU_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUA")
+    @SequenceGenerator(name = "SEQ_USUA", allocationSize = 1, sequenceName = "usuarios_seq")
     private String ID;
+    
     private String name;
+    
+    private String pass;
+    
     private ArrayList<Friend> amigosEnApp;
+    
+    //@OneToMany(mappedBy = "usuario", cascade = {CascadeType.ALL})
+    private ArrayList<Usuario> amigos;
+    
+    
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.ALL})
+    private ArrayList<LikeU> likes;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.ALL})
+    private List<Tienda> tLikes;
+    
+    //Constructor
+    
     public Usuario(){
         
     }
@@ -38,6 +65,8 @@ public class Usuario {
        this.name = name;
        this.amigosEnApp = nAmigosEnApp;
     }
+    
+    //Metodos
     
     public ArrayList<LikeU> getLikes() {
         return likes;
@@ -56,6 +85,23 @@ public class Usuario {
     }
     
     
+    public ArrayList<Friend> getAmigosEnApp() {
+        return amigosEnApp;
+    }
+
+    public void setAmigosEnApp(ArrayList<Friend> amigosEnApp) {
+        this.amigosEnApp = amigosEnApp;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
     
 }

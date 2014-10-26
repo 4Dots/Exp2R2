@@ -71,8 +71,8 @@ public class LoginBean implements Serializable{
     }
     
     public Usuario buscarUsuario(){
-        u = servicio.getUser();
-        System.out.println(u);
+        u = getInstance().getUser();
+        System.out.println("Usuario en LoginBean: "+u);
         return u;
     }
     
@@ -102,6 +102,7 @@ public class LoginBean implements Serializable{
            
         }
         servicio = getInstance();
+        System.out.println("Servicio: "+ servicio);
         return loginB;
     }
 }

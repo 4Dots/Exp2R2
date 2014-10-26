@@ -29,11 +29,16 @@ import javax.servlet.http.HttpServletResponse;
 @Stateful
 public class ServicioLogin {
     
+    //Atributos
     private Usuario u;
     
-    private Facebook fb;
+    private static Facebook fb;
     
     private static ServicioLogin servicioLogin;
+    
+    private static ServicioLikes servicioLikes;
+    
+    //Constructor
     
     public ServicioLogin()
     {
@@ -46,6 +51,8 @@ public class ServicioLogin {
         }
         return servicioLogin;
     }
+    
+    //Metodos
     
     public Facebook login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -62,11 +69,13 @@ public class ServicioLogin {
         try{
             ArrayList<LikeU> nlik = new ArrayList();
             ResponseList<Like> likes =  facebook.getUserLikes();
+            System.out.println("Tamaño Likes: "+likes.size());
             for (int i = 0; i < likes.size(); i++)
             {
                Like l = likes.get(i);
-               if (l.getCategory().equals("Clothing"))
+            //   if (l.getCategory().equals("Clothing"))
                {
+                   System.out.println("Likes en ServicioLogin: "+l.getName());
                    LikeU nl = new LikeU(l.getName(), l.getCategory());
                    nlik.add(nl);
                }
@@ -88,8 +97,9 @@ public class ServicioLogin {
     }
     
     public Usuario getUser()
-    {
-        return u;
+    {   
+        System.out.println("Usuario en ServicioLogin2: " +u);
+        return buscarUsuario();
     }
     
     public Usuario buscarUsuario(){
@@ -98,13 +108,16 @@ public class ServicioLogin {
         
         try{
             ResponseList<Like> likes =  fb.getUserLikes();
+             System.out.println("Tamaño Likes: "+likes.size());
             for (int i = 0; i < likes.size(); i++)
             {
                Like l = likes.get(i);
-               if (l.getCategory().equals("Clothing"))
+               if (l.getCategory().contains("Clothing"))
                {
+                   System.out.println("Likes en ServicioLogin: "+l.getName());
                    LikeU nl = new LikeU(l.getName(), l.getCategory());
                    nlik.add(nl);
+                   servicioLikes.getInstanceSL().agregarTienda(l.getName());
                }
             }
             

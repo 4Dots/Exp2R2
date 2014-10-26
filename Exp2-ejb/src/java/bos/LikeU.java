@@ -6,14 +6,26 @@
 
 package bos;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author estudiante
  */
+@Entity
 public class LikeU {
     
+    //Atributos
+    
+    @Id
+    //@Column(name="LIKE_ID")
+    @ManyToOne(optional=false)
     private String name;
 
+    //Constructor
     
     public LikeU(){
         
@@ -23,6 +35,8 @@ public class LikeU {
         this.name = name;
         this.category = category;
     }
+    
+    //Metodos
     
     public String getName() {
         return name;
