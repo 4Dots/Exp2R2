@@ -27,6 +27,8 @@ public class Bono {
     @SequenceGenerator(name = "SEQ_BONO", allocationSize = 1, sequenceName = "bonos_seq")
     private long id;
     
+    private String codigo;
+    
     private boolean reclamado;
     
     private double valor;
@@ -35,10 +37,14 @@ public class Bono {
     
     private Usuario dueño;
     
-    public Bono(double valor, Usuario comprador, Usuario dueño){
+    private Tienda tienda;
+    
+    public Bono(String codigo, double valor, Usuario comprador, Tienda tienda){
+        
         reclamado = false;
-        this.valor=valor;
+        this.valor= valor;
         this.comprador = comprador;
-        this.dueño=dueño;
+        this.tienda = tienda;
+        //this.dueño= dueño;
     }
 }

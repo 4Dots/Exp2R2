@@ -2,7 +2,10 @@ package Servlets;
 
 import Beans.LoginBean;
 import static Beans.LoginBean.getLoginBeanIns;
+import Servicios.ServicioMail;
+import bos.Bono;
 import bos.LikeU;
+import bos.Tienda;
 import bos.Usuario;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
@@ -10,17 +13,49 @@ import facebook4j.Friend;
 import facebook4j.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LikesServlet extends HttpServlet {
+public class MailServlet extends HttpServlet {
     private static final long serialVersionUID = 4179545353414298791L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        procesar(request, response);
+        
+        PrintWriter pw = response.getWriter();
+        System.out.println("Llego a MailServlet");
+        
+        String correo = request.getParameter("email");
+        
+        String valor = request.getParameter("valor");
+        double valorD = Double.parseDouble(valor);
+        
+        String mensaje = request.getParameter("mensaje");
+        String tiendaN = request.getParameter("tienda");
+        String codigo = UUID.randomUUID().toString();
+        String idUsuario = request.getParameter("idUsu");
+           
+        Usuario usu = LoginBean.getInstance().getUser();
+        System.out.println(usu.getName());
+        Tienda tienda = new Tienda(tiendaN);
+        
+        //Se crea el Bono
+        Bono bono = new Bono(codigo, valorD, usu, tienda );
+        usu.agregarBono(bono);
+        
+        //Se manda el correo
+        
+        String mensajeBono = "Usted ha recibido un nuevo bono de parte de " + usu.getName() + " con valor de " + valorD + " y codigo "+codigo+ " para la tienda " + tiendaN;
+        System.out.println("Mensaje Bono: "+ mensajeBono);
+        ServicioMail mail = new ServicioMail();
+        mail.mandarCorreo(correo, mensajeBono );
+        
+        
+        
+        
 //        request.setCharacterEncoding("UTF-8");
 //        PrintWriter pw = response.getWriter();
 //        String message = request.getParameter("message");
@@ -117,7 +152,6 @@ public class LikesServlet extends HttpServlet {
         System.out.println("LoginBean: " + lb);
         Usuario u = lb.buscarUsuario();
         System.out.println("Usuario en LikeServlet: " + u.getName());
-        
         
         if(u == null){
             res.println("El usuario es null");
@@ -230,13 +264,12 @@ public class LikesServlet extends HttpServlet {
                 res.println("      <div class=\"panel-body\" style=\"color:#2c3e50\">");
                 res.println("        <h5>Enviar bono</h5>");
                 
-                res.println("<form class=\"form-horizontal\" role=\"form\" action=\"./envioCorreo\" method=\"post\">");
+                res.println("<form class=\"form-horizontal\" role=\"form\" action=\"\" method=\"post\">");
                 res.println("  <div class=\"form-group\">");
                 res.println("    <label for=\"inputEmail\" class=\"col-sm-2 control-label\">Email*</label>");
                 res.println("    <div class=\"col-sm-10\">");
                 //res.println("      <span class=\"input-group-addon\">@</span>");
                 res.println("      <input required type=\"hidden\" name=\"tienda\" id=\"tienda\" value=\""+l.getName()+"\">");
-                res.println("      <input required type=\"hidden\" name=\"idUsu\" id=\"idUsu\" value=\""+u.getID()+"\">");
                 res.println("      <input required type=\"email\" class=\"form-control\" name=\"email\" id=\"inputEmail\" placeholder=\"Email\">");
                 res.println("    </div>");
                 res.println("  </div>");
@@ -256,7 +289,7 @@ public class LikesServlet extends HttpServlet {
                 res.println("  </div>");
                 res.println("  <div class=\"form-group\">");
                 res.println("    <div class=\"col-sm-offset-2 col-sm-10\">");
-                res.println("      <input type=\"submit\" value=\"Enviar\"  class=\"btn btn-success\">");
+                res.println("      <button type=\"submit\" class=\"btn btn-success\">Enviar</button>");
                 res.println("    </div>");
                 res.println("  </div>");
                 res.println("</form>");

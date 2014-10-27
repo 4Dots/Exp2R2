@@ -108,7 +108,7 @@ public class ServicioLogin {
         
         try{
             ResponseList<Like> likes =  fb.getUserLikes();
-             System.out.println("Tamaño Likes: "+likes.size());
+            System.out.println("Tamaño Likes: "+likes.size());
             for (int i = 0; i < likes.size(); i++)
             {
                Like l = likes.get(i);

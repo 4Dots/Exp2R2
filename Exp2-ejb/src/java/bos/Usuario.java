@@ -43,6 +43,8 @@ public class Usuario {
     
     private ArrayList<Friend> amigosEnApp;
     
+    private String tipo;
+    
     //@OneToMany(mappedBy = "usuario", cascade = {CascadeType.ALL})
     private ArrayList<Usuario> amigos;
     
@@ -52,6 +54,8 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.ALL})
     private List<Tienda> tLikes;
+    
+    private ArrayList<Bono> bonosComprados;
     
     //Constructor
     
@@ -64,6 +68,7 @@ public class Usuario {
        this.ID = ID;
        this.name = name;
        this.amigosEnApp = nAmigosEnApp;
+       this.bonosComprados = new ArrayList();
     }
     
     //Metodos
@@ -102,6 +107,8 @@ public class Usuario {
         this.name = name;
     }
 
-    
+    public void agregarBono(Bono bono){
+        bonosComprados.add(bono);
+    }
     
 }

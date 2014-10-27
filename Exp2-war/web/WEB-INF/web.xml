@@ -20,6 +20,11 @@
         <servlet-name>likes</servlet-name>
         <servlet-class>Servlets.LikesServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>Correo</servlet-name>
+        <servlet-class>Servlets.MailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>
@@ -39,6 +44,11 @@
     <servlet-mapping>
         <servlet-name>likes</servlet-name>
         <url-pattern>/maybe</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Correo</servlet-name>
+        <url-pattern>/envioCorreo</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
