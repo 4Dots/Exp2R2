@@ -73,7 +73,7 @@ public class ServicioMail {
     
     
     public void enviar(String destino, String mensaje){
-        
+        System.out.println("Entro al enviar");
          
         try{
             Properties props = new Properties();
@@ -82,18 +82,25 @@ public class ServicioMail {
             props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.port", "465");         
-            Session ses = Session.getDefaultInstance(props);  
+            Session ses = Session.getInstance(props);
+            System.out.println("Sesion Creada");
             MimeMessage mim = new MimeMessage(ses);
             mim.setFrom(new InternetAddress("sebastiansalas94@gmail.com"));
             mim.setRecipient(Message.RecipientType.TO,new InternetAddress(destino));
             mim.setSubject("Tienes un nuevo bono!");
             mim.setText(mensaje);
-            Transport.send(mim);
-            
+            System.out.println("Mensaje creado");
+            Transport trans = ses.getTransport("smtp");
+            System.out.println("Paso?");
+            trans.connect("sebastiansalas94@gmail.com", "sm940410");
+            System.out.println("Si paso");
+            trans.sendMessage(mim, mim.getAllRecipients());
+            //Transport.send(mim);
         }catch(MessagingException mex ){
             mex.printStackTrace();
 
         }
+        System.out.println("Acabo Enviar");
     
     }
     
