@@ -51,7 +51,7 @@ public class MailServlet extends HttpServlet {
         String mensajeBono = "Usted ha recibido un nuevo bono de parte de " + usu.getName() + " con valor de " + valorD + " y codigo "+codigo+ " para la tienda " + tiendaN;
         System.out.println("Mensaje Bono: "+ mensajeBono);
         ServicioMail mail = new ServicioMail();
-        mail.mandarCorreo(correo, mensajeBono );
+        mail.enviar(correo, mensajeBono );
         
         
         
