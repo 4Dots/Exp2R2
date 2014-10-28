@@ -32,7 +32,7 @@ public class ServicioMail {
       String from = "sebastiansalas94@gmail.com";
 
       // Assuming you are sending email from localhost
-      String host = "localhost";
+      String host = "8080";
 
       // Get system properties
       Properties properties = System.getProperties();
