@@ -43,7 +43,7 @@ public class MailServlet extends HttpServlet {
         Tienda tienda = new Tienda(tiendaN);
         
         //Se crea el Bono
-        Bono bono = new Bono(codigo, valorD, usu, tienda );
+        Bono bono = new Bono(codigo, valorD, usu.getID(), tienda, usu.getName() );
         usu.agregarBono(bono);
         
         //Se manda el correo
