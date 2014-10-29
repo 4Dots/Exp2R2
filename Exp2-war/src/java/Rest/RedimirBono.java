@@ -6,15 +6,19 @@
 
 package Rest;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
+import Servicios.ServicioPersistenciaNoSql;
+import bos.Bono;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * REST Web Service
@@ -42,10 +46,21 @@ public class RedimirBono {
     public String getJson(@QueryParam("code") String code ) {
         
         //TODO Buscar bono, return true or false
-        if (code.equals("dis"))
-            return "true";
-        else 
-            return "false";
+        
+        ServicioPersistenciaNoSql serv = new ServicioPersistenciaNoSql();
+        
+        List bonos =  serv.findAll(Bono.class);
+        
+        for (int i = 0; i < bonos.size(); i++)
+        {
+            Bono b = (Bono) bonos.get(i);
+            
+            if (b.getCodigo().equals(code))
+            {
+                return "naiz";
+            }
+        }
+        return "false";
     }
 
     /**
