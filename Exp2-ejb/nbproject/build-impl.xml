@@ -795,23 +795,23 @@ exists or setup the property manually. For example like this:
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
         <copyfiles files="${file.reference.facebook4j-core-2.2.0.jar}" todir="${build.classes.dir}"/>
         <copyfiles files="${libs.absolutelayout.classpath}" todir="${build.classes.dir}"/>
-        <copyfiles files="${libs.MongoDB.classpath}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.mongo-2.10.1.jar}" todir="${build.classes.dir}"/>
     </target>
     <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
         <basename file="${file.reference.facebook4j-core-2.2.0.jar}" property="manifest.file.reference.facebook4j-core-2.2.0.jar"/>
         <basename file="${libs.absolutelayout.classpath}" property="manifest.libs.absolutelayout.classpath"/>
-        <basename file="${libs.MongoDB.classpath}" property="manifest.libs.MongoDB.classpath"/>
+        <basename file="${file.reference.mongo-2.10.1.jar}" property="manifest.file.reference.mongo-2.10.1.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
             <attribute name="Extension-List" value="jar-1 jar-2 jar-3 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.facebook4j-core-2.2.0.jar}"/>
             <attribute name="jar-2-Extension-Name" value="${manifest.libs.absolutelayout.classpath}"/>
-            <attribute name="jar-3-Extension-Name" value="${manifest.libs.MongoDB.classpath}"/>
+            <attribute name="jar-3-Extension-Name" value="${manifest.file.reference.mongo-2.10.1.jar}"/>
         </manifest>
     </target>
     <target depends="compile" name="library-inclusion-in-manifest">
         <copyfiles files="${file.reference.facebook4j-core-2.2.0.jar}" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.absolutelayout.classpath}" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${libs.MongoDB.classpath}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.mongo-2.10.1.jar}" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">
