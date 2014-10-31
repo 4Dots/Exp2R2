@@ -28,7 +28,7 @@ public class Bono
     @SequenceGenerator(name = "SEQ_BONO", allocationSize = 1, sequenceName = "bonos_seq")
     private long id;
 
-    private String codigo;
+    private byte[] codigo;
 
     private boolean reclamado;
 
@@ -40,7 +40,7 @@ public class Bono
 
     private Tienda tienda;
 
-    public Bono(String codigo, double valor, String comprador, Tienda tienda, String nombre)
+    public Bono(byte [] codigo, double valor, String comprador, Tienda tienda, String nombre)
     {
 
         reclamado = false;
@@ -48,6 +48,7 @@ public class Bono
         this.IDcomprador = comprador;
         this.nombreComprador = nombre;
         this.tienda = tienda;
+        this.codigo = codigo;
         //this.dueño= dueño;
     }
     
@@ -75,7 +76,7 @@ public class Bono
     /**
      * @return the codigo
      */
-    public String getCodigo()
+    public byte [] getCodigo()
     {
         return codigo;
     }
@@ -83,7 +84,7 @@ public class Bono
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(String codigo)
+    public void setCodigo(byte [] codigo)
     {
         this.codigo = codigo;
     }

@@ -100,7 +100,7 @@ public class ServicioPersistenciaNoSql extends MongoConfig implements IServicioP
             {
                 DBObject dBObject = cursor.next();
                 Bono bono = new Bono();
-                bono.setCodigo((String) dBObject.get("codigo"));
+                bono.setCodigo((byte[]) dBObject.get("codigo"));
                 bono.setTienda(new Tienda((String) dBObject.get("tienda")));
                 bono.setValor((Double) dBObject.get("valor"));
                 bono.setIDcomprador((String) dBObject.get("IDcomprador"));

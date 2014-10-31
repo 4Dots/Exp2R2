@@ -5,15 +5,17 @@ import static Beans.LoginBean.getLoginBeanIns;
 import Servicios.ServicioMail;
 import bos.Bono;
 import bos.LikeU;
+import bos.Seguridad;
 import bos.Tienda;
 import bos.Usuario;
 import facebook4j.Facebook;
-import facebook4j.FacebookException;
-import facebook4j.Friend;
-import facebook4j.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MailServlet extends HttpServlet {
     private static final long serialVersionUID = 4179545353414298791L;
+    public final static String ALG_SIM = "Blowfish";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +38,23 @@ public class MailServlet extends HttpServlet {
         
         String mensaje = request.getParameter("mensaje");
         String tiendaN = request.getParameter("tienda");
-        String codigo = UUID.randomUUID().toString();
+        String codBase = UUID.randomUUID().toString();
+        
+        byte[] codigo = null;
+        
+        SecretKey sk = new SecretKeySpec(Seguridad.key.getBytes(), ALG_SIM);
+        try
+        {
+            Cipher cipher = Cipher.getInstance(ALG_SIM);
+            cipher.init(Cipher.ENCRYPT_MODE, sk);
+            codigo = cipher.doFinal(codBase.getBytes());
+        }
+        catch (Exception e)
+        {
+            
+        }
+        
+        
         String idUsuario = request.getParameter("idUsu");
            
         Usuario usu = LoginBean.getInstance().getUser();
@@ -48,7 +67,7 @@ public class MailServlet extends HttpServlet {
         
         //Se manda el correo
         
-        String mensajeBono = "Usted ha recibido un nuevo bono de parte de " + usu.getName() + " con valor de " + valorD + " y codigo "+codigo+ " para la tienda " + tiendaN;
+        String mensajeBono = "Usted ha recibido un nuevo bono de parte de " + usu.getName() + " con valor de " + valorD + " y codigo "+codBase+ " para la tienda " + tiendaN;
         System.out.println("Mensaje Bono: "+ mensajeBono);
         ServicioMail mail = new ServicioMail();
         mail.mandarCorreo(correo, mensajeBono );
