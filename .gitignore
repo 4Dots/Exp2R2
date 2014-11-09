@@ -1,6 +1,14 @@
 /nbproject/private/
 /Exp2-war/nbproject/private/
 /Exp2-ejb/nbproject/private/
+/build/
+/Exp2-war/build/
+/Exp2-ejb/build/
+/Exp2-ejb/dist/
+/dist/
+/Exp2-war/dist/
+/Tienda/build/
+/Tienda/nbproject/private/
 /Exp2-ejb/build/
 /Exp2-war/build/
 /build/
