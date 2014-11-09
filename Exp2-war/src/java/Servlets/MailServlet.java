@@ -69,9 +69,10 @@ public class MailServlet extends HttpServlet {
         
         String mensajeBono = "Usted ha recibido un nuevo bono de parte de " + usu.getName() + " con valor de " + valorD + " y codigo "+codBase+ " para la tienda " + tiendaN;
         System.out.println("Mensaje Bono: "+ mensajeBono);
+        mensajeBono +=  "\n" + "Tambien le mandan adjunto este mensaje: " + mensaje;
         ServicioMail mail = new ServicioMail();
         mail.enviar(correo, mensajeBono );
-        
+        procesar(request, response);
         
         
         
@@ -247,12 +248,12 @@ public class MailServlet extends HttpServlet {
             res.println("        <!-- /.container-fluid -->");
             res.println("    </nav>");
             res.println("");
-            
             res.println("    <header style=\"background-color:white\">");
             res.println("        <div class=\"container\">");
             res.println("            <div class=\"row\">");
             res.println("                <div class=\"col-lg-12 text-center\" style=\"color:#2c3e50\">");
             res.println("                    <h2>Tiendas</h2>");
+            res.println("                    <h7>El correo fue enviado</h7>");
             res.println("                    <hr class=\"star-primary\">");
             res.println("                </div>");
             res.println("            </div>");
@@ -303,7 +304,7 @@ public class MailServlet extends HttpServlet {
                 res.println("    <label for=\"mensaje\" class=\"col-sm-2 control-label\">Mensaje</label>");
                 res.println("    <div class=\"col-sm-10\">");
                 //res.println("      <span class=\"input-group-addon\">$</span>");
-                res.println("      <textarea class=\"form-control\" name=\"mensaje\" id=\"mensaje\" placeholder=\"Message goes jir\"></textarea>");
+                res.println("      <textarea class=\"form-control\" name=\"mensaje\" id=\"mensaje\" placeholder=\"Escriba su mensaje.\"></textarea>");
                 res.println("    </div>");
                 res.println("  </div>");
                 res.println("  <div class=\"form-group\">");

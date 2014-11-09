@@ -137,7 +137,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-4 portfolio-item" data-toggle="tooltip" data-placement="top" title="Ver tiendas">
-                    <a href="./maybe?Likes" class="portfolio-link" data-toggle="modal">
+                    <a href="./likes?Likes" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>

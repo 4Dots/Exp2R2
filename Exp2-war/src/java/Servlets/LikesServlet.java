@@ -251,7 +251,7 @@ public class LikesServlet extends HttpServlet {
                 res.println("    <label for=\"mensaje\" class=\"col-sm-2 control-label\">Mensaje</label>");
                 res.println("    <div class=\"col-sm-10\">");
                 //res.println("      <span class=\"input-group-addon\">$</span>");
-                res.println("      <textarea class=\"form-control\" name=\"mensaje\" id=\"mensaje\" placeholder=\"Message goes jir\"></textarea>");
+                res.println("      <textarea class=\"form-control\" name=\"mensaje\" id=\"mensaje\" placeholder=\"Escriba su mensaje.\"></textarea>");
                 res.println("    </div>");
                 res.println("  </div>");
                 res.println("  <div class=\"form-group\">");

@@ -57,7 +57,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>likes</servlet-name>
-        <url-pattern>/maybe</url-pattern>
+        <url-pattern>/likes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Correo</servlet-name>
