@@ -24,7 +24,7 @@
         <servlet-name>Correo</servlet-name>
         <servlet-class>Servlets.MailServlet</servlet-class>
     </servlet>
-    <servlet>
+    <!--<servlet>
         <servlet-name>ServletAdaptor</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -38,6 +38,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    -->
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>
@@ -62,10 +63,12 @@
         <servlet-name>Correo</servlet-name>
         <url-pattern>/envioCorreo</url-pattern>
     </servlet-mapping>
+    <!--
     <servlet-mapping>
         <servlet-name>ServletAdaptor</servlet-name>
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
+    -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
