@@ -24,6 +24,11 @@
         <servlet-name>Correo</servlet-name>
         <servlet-class>Servlets.MailServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>Historial</servlet-name>
+        <servlet-class>Servlets.HistorialServlet</servlet-class>
+    </servlet>
     <!--<servlet>
         <servlet-name>ServletAdaptor</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -63,6 +68,11 @@
         <servlet-name>Correo</servlet-name>
         <url-pattern>/envioCorreo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Historial</servlet-name>
+        <url-pattern>/historial</url-pattern>
+    </servlet-mapping>
+    
     <!--
     <servlet-mapping>
         <servlet-name>ServletAdaptor</servlet-name>
