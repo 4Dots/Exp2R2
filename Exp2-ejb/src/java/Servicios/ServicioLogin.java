@@ -126,7 +126,11 @@ public class ServicioLogin {
             ResponseList<Friend> amigos =  fb.getFriends();
             ArrayList<Friend> am = (ArrayList<Friend>) amigos;
             
+            ServicioPersistenciaSql sql = new ServicioPersistenciaSql();
+            
+            
             usu = new Usuario(nlik, me.getId(), me.getName(), am);
+            sql.create(usu);
         }
         catch(Exception e)
         {

@@ -21,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 /**
  *
@@ -35,13 +36,13 @@ public class Usuario
     //Atributos
     @Id
     // @Column(name="USU_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUA")
-    @SequenceGenerator(name = "SEQ_USUA", allocationSize = 1, sequenceName = "usuarios_seq")
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUA")
+    //@SequenceGenerator(name = "SEQ_USUA", allocationSize = 1, sequenceName = "usuarios_seq")
     private String ID;
 
     private String name;
 
-    private String pass;
+    //private String pass;
 
     private ArrayList<Friend> amigosEnApp;
 
@@ -62,10 +63,14 @@ public class Usuario
     })
     private List<Tienda> tLikes;
 
+    @Transient
     private ArrayList<Bono> bonosComprados;
 
+    @Transient
     private ServicioPersistenciaNoSql spnsql;
-    //Constructor
+    
+
+//Constructor
     public Usuario()
     {
 
