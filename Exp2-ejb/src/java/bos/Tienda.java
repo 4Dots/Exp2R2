@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries(
         @NamedQuery(name = "Tienda.findAll", query = "select o from Tienda o"))
+@XmlRootElement
 public class Tienda
 {
 

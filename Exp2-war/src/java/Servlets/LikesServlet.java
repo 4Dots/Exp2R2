@@ -337,6 +337,8 @@ public class LikesServlet extends HttpServlet {
 //            res.println("                    </form>");
             res.println("                </div>");
             res.println("            </div>");
+             res.println("      <input type=\"submit\" value=\"Atras\"  class=\"btn btn-success\">");
+               
             res.println("        </div>");
             res.println("    </header>");
             
