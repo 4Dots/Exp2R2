@@ -8,6 +8,9 @@ import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.Friend;
 import facebook4j.User;
+import facebook4j.internal.org.json.JSONException;
+import facebook4j.internal.org.json.JSONObject;
+import facebook4j.internal.org.json.XML;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -108,8 +111,30 @@ public class LikesServlet extends HttpServlet {
     
     private void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        //request.setCharacterEncoding("UTF-8");
+        //response.setContentType("text/json");
         PrintWriter res = response.getWriter();
+        if (request.getParameter("gPlus") != null)
+        {
+            res.println("gHuehue");
+            res.println(request.getParameter("id"));
+            res.println(request.getParameter("ppl"));
+            
+            try {
+                JSONObject jsonObj = new JSONObject(request.getParameter("ppl"));          
+
+                String xmlString= XML.toString(jsonObj);
+                res.println(xmlString);
+            } catch (JSONException e1) {
+                 // TODO Auto-generated catch block
+                 e1.printStackTrace();
+            }
+            
+            //System.out.println(request.getParameter("ppl"));
+        }
+        else
+        {
+        //request.setCharacterEncoding("UTF-8");
+        
         String message = request.getParameter("message");
         Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
         
@@ -178,28 +203,32 @@ public class LikesServlet extends HttpServlet {
             res.println("                    <li class=\"hidden\">");
             res.println("                        <a href=\"#page-top\"></a>");
             res.println("                    </li>");
-//            res.println("                    <li class=\"page-scroll\">");
-//            res.println("                        <a href=\"#portfolio\">Portfolio</a>");
-//            res.println("                    </li>");
-//            res.println("                    <li class=\"page-scroll\">");
-//            res.println("                        <a href=\"#about\">About</a>");
-//            res.println("                    </li>");
-//            res.println("                    <li class=\"page-scroll\">");
-//            res.println("                        <a href=\"#contact\">Contact</a>");
-//            res.println("                    </li>");
+            res.println("                    <li class=\"page-scroll\">");
+            res.println("                        <a href=\"index.jsp\">Inicio</a>");
+            res.println("                    </li>");
+            res.println("                    <li class=\"page-scroll\">");
+            res.println("                        <a href=\"./likes?Likes\">Tiendas</a>");
+            res.println("                    </li>");
+            res.println("                    <li class=\"page-scroll\">");
+            res.println("                        <a href=\"./historial?Historial\">Historial</a>");
+            res.println("                    </li>");
+            res.println("                    <li class=\"page-scroll\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"\" data-original-title=\"Cerrar sesi&oacute;n\">");
+            res.println("                        <a href=\"./logout\">Salir</a>");
+            res.println("                    </li>");
             res.println("                </ul>");
             res.println("            </div>");
             res.println("            <!-- /.navbar-collapse -->");
             res.println("        </div>");
             res.println("        <!-- /.container-fluid -->");
             res.println("    </nav>");
-            res.println("");
+            
             
             res.println("    <header style=\"background-color:white\">");
             res.println("        <div class=\"container\">");
             res.println("            <div class=\"row\">");
             res.println("                <div class=\"col-lg-12 text-center\" style=\"color:#2c3e50\">");
             res.println("                    <h2>Tiendas</h2>");
+            res.println("                    <p style=\"font-size:0.8em\">(Click para enviar bono a un amigo)</p>");
             res.println("                    <hr class=\"star-primary\">");
             res.println("                </div>");
             res.println("            </div>");
@@ -334,10 +363,13 @@ public class LikesServlet extends HttpServlet {
             res.println("    <script src=\"js/classie.js\"></script>");
             res.println("    <script src=\"js/cbpAnimatedHeader.js\"></script>");
             res.println("");
+            res.println("    <script src=\"js/scriptsTMO.js\"></script>");
             res.println("    <!-- Contact Form JavaScript -->");
             res.println("    <script src=\"js/jqBootstrapValidation.js\"></script>");
             res.println("    <script src=\"js/contact_me.js\"></script>");
             res.println("");
+            res.println("    <script src=\"https://apis.google.com/js/client:platform.js\" async defer></script>");
+            res.println("    <script src=\"js/gPlus.js\"></script>");
             res.println("    <!-- Custom Theme JavaScript -->");
             res.println("    <script src=\"js/freelancer.js\"></script>");
             res.println("");
@@ -345,5 +377,7 @@ public class LikesServlet extends HttpServlet {
             res.println("");
             res.println("</html>");
         }
+        }
+        
     }
 }
