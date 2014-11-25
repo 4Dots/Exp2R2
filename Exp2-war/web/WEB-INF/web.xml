@@ -24,7 +24,6 @@
         <servlet-name>Correo</servlet-name>
         <servlet-class>Servlets.MailServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>Historial</servlet-name>
         <servlet-class>Servlets.HistorialServlet</servlet-class>
@@ -44,6 +43,20 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     -->
+    <servlet>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <description>Multiple packages, separated by semicolon(;), can be specified in param-value</description>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>Rest</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>
@@ -72,13 +85,16 @@
         <servlet-name>Historial</servlet-name>
         <url-pattern>/historial</url-pattern>
     </servlet-mapping>
-    
     <!--
     <servlet-mapping>
         <servlet-name>ServletAdaptor</servlet-name>
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
     -->
+    <servlet-mapping>
+        <servlet-name>ServletAdaptor</servlet-name>
+        <url-pattern>/webresources/*</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

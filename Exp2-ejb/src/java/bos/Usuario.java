@@ -22,6 +22,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -30,6 +33,7 @@ import javax.persistence.Transient;
 @Entity
 @NamedQueries(
         @NamedQuery(name = "Usuario.findAll", query = "select o from Usuario o"))
+@XmlRootElement
 public class Usuario
 {
 
@@ -87,6 +91,8 @@ public class Usuario
     }
 
     //Metodos
+    @XmlTransient
+    @JsonIgnore
     public ArrayList<LikeU> getLikes()
     {
         return likes;
