@@ -45,7 +45,7 @@ public class RedimirBono {
     @Produces("application/json")
     public String getJson(@QueryParam("code") String code ) {
         
-        //TODO Buscar bono, return true or false
+        
         
         ServicioPersistenciaNoSql serv = new ServicioPersistenciaNoSql();
         
@@ -57,7 +57,7 @@ public class RedimirBono {
             
             if (b.getCodigo().equals(code))
             {
-                return "naiz";
+                return "true";
             }
         }
         return "false";

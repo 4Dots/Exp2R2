@@ -34,6 +34,7 @@
 
 <body id="page-top" class="index">
 <tag:notloggedin>
+<asd id="fbThing">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -80,11 +81,23 @@
                         <span class="name">Hola! :)</span>
                         <hr class="star-light">
                         <span><a class="btn-success" href="signin">Iniciar sesi&oacute;n con facebook</a></span>
+                        <br>
+                        <span id="signinButton">
+                            <span
+                            class="g-signin"
+                            data-callback="signinCallback"
+                            data-clientid="43030837086-nneb53g7skdgmm1dm0dlosc4jet1ap0s.apps.googleusercontent.com"
+                            data-cookiepolicy="single_host_origin"
+                            data-requestvisibleactions="http://schema.org/AddAction"
+                            data-scope="https://www.googleapis.com/auth/plus.login">
+                        </span>
+                    </span>
                     </div>
                 </div>
             </div>
         </div>
-    </header>  
+    </header>
+</asd>  
 </tag:notloggedin>
 <!--<tag:notloggedin>
   <a href="signin">Sign in with Facebook</a>
@@ -112,15 +125,18 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <!--<li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
+                    <li class="page-scroll">
+                        <a href="index.jsp">Inicio</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">About</a>
+                        <a href="./likes?Likes">Tiendas</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact</a>
-                    </li>-->
+                        <a href="./historial?Historial">Historial</a>
+                    </li>
+                    <li class="page-scroll" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Cerrar sesi&oacute;n">
+                        <a href="./logout">Salir</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -171,12 +187,94 @@
   </form>-->
    
   
-  <jsp:useBean id="usuario" class="Beans.LoginBean" scope="request"/>
-  <jsp:getProperty name="usuario" property="asd"/>
   
   
-<a href="./logout">logout</a>
+  
+<!--<a href="./logout">logout</a>-->
 </tag:loggedin>
+<!--<jsp:useBean id="usuario" class="Beans.LoginBean" scope="request"/>
+  <jsp:getProperty name="usuario" property="asd"/>-->
+<asd id="gPlusYay" style="display:none">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.jsp">Tu Mejor Opci&oacute;n</a> <h5 style="color:white" id="nombreUser">Name goes here</h5>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <!--<li class="page-scroll">
+                        <a href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <header style="background-color:white" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 style="color:#2c3e50">Acciones</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 portfolio-item" data-toggle="tooltip" data-placement="top" title="Ver tiendas">
+                    <a onclick="verAmigos()" href="#" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/circus.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item" data-toggle="tooltip" data-placement="top" title="Historial de bonos">
+                    <a href="./historial?Historial" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/safe.png" class="img-responsive" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+  <!--<h1>Welcome ${facebook.name}  </h1>
+  <form action="./post" method="post">
+    <textarea cols="80" rows="2" name="message"></textarea>
+    <input type="submit" name="post" value="statuses" />
+  </form>
+
+   <form action="./maybe" method="post">
+    <input type="submit" name="maybe" value="Likes" />      THIIIISS!!!
+  </form>-->
+   
+  
+</asd>
+
 <!-- Footer -->
     <footer class="text-center">
         <div class="footer-below">
@@ -199,6 +297,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="js/classie.js"></script>
     <script src="js/cbpAnimatedHeader.js"></script>
+    <script src="js/scriptsTMO.js"></script>
+
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <script src="js/gPlus.js"></script>
 
     <!-- Contact Form JavaScript -->
     <script src="js/jqBootstrapValidation.js"></script>
