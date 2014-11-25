@@ -44,7 +44,7 @@ function getMe() {
 
 function verAmigos() {
 
-  var uToken = getUserToken;
+  var uToken = getUserToken();
 
   // var userID;
 
