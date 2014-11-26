@@ -44,7 +44,9 @@
             <included-library dirs="200">file.reference.protobuf-java-2.4.1.jar</included-library>
             <included-library dirs="200">file.reference.transaction-api-1.1.jar</included-library>
             <included-library dirs="200">file.reference.xpp3-1.1.4c.jar</included-library>
-            <included-library dirs="200">libs.JAVADB_DRIVER_LABEL.classpath</included-library>
+            <included-library dirs="200">file.reference.derby.jar</included-library>
+            <included-library dirs="200">file.reference.derbyclient.jar</included-library>
+            <included-library dirs="200">file.reference.derbynet.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
