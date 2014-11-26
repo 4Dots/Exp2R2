@@ -17,6 +17,7 @@
 
     <!-- Custom CSS -->
     <link href="css/freelancer.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -230,7 +231,7 @@
         <!-- /.container-fluid -->
     </nav>
     <header style="background-color:white" id="portfolio">
-        <div class="container">
+        <div class="container" id="hideThis" style="color:#2c3e50">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 style="color:#2c3e50">Acciones</h2>
@@ -238,8 +239,18 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-4 portfolio-item" data-toggle="tooltip" data-placement="top" title="Ver amigos">
+                    <a onclick="showFriends()" href="#" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                    </a>
+                </div>
                 <div class="col-sm-4 portfolio-item" data-toggle="tooltip" data-placement="top" title="Ver tiendas">
-                    <a onclick="verAmigos()" href="#" class="portfolio-link" data-toggle="modal">
+                    <a onclick="#" href="#" class="portfolio-link" data-toggle="modal"><!--FIX-->
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
@@ -274,7 +285,9 @@
    
   
 </asd>
-
+<asd id="friends">
+    
+</asd>
 <!-- Footer -->
     <footer class="text-center">
         <div class="footer-below">

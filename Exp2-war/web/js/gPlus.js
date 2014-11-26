@@ -42,6 +42,50 @@ function getMe() {
    });
 }
 
+function showFriends(result)
+{  
+  //document.getElementById('hideThis').setAttribute('style','display:none');
+  var request = gapi.client.plus.people.list(
+  {
+    'userId': 'me',
+    'collection' : 'visible'
+  });
+  request.execute(function (resp)
+  {
+    var email = '';
+    var str = "";
+    var collapses = "<ul id=\"ffs\">";
+
+    for(var i = 0; i < resp.items.length; i++)
+    {
+      //if(resp[i]['type'] == 'account')
+      //{
+        //email = resp.items[i]['emails'][i]['value'];
+        //str += "Name:" + resp.items[i]['displayName'] + "<br>";
+        //str += "Image:" + resp.items[i]['image']['url'] + "<br>";
+        //str += "<img src='" + resp.items[i]['image']['url'] + "' /><br>";
+
+        //str += "URL:" + resp.items[i]['url'] + "<br>";
+        //str += "Email:" + email + "<br>";
+        var name = resp.items[i]['displayName'];
+        var pName = name.replace(/ /g,'');
+
+        collapses += "<li><div class=\"panel-group\" id=\"accordion\">        <div class=\"panel panel-default\">        <div class=\"panel-heading\">        <h4 class=\"panel-title\">        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse"+pName+"\">        "+name+"        </a>        </h4>        </div>        <div id=\"collapse"+pName+"\" class=\"panel-collapse collapse\" style=\"\">        <div class=\"panel-body\" style=\"color:#2c3e50\">        <h5>Detalles</h5>        <img style=\"float:left\" src=\""+resp.items[i]['image']['url']+"\"/>  Perfil: <a target=\"blank\" href=\""+resp.items[i]['url']+"\">"+resp.items[i]['url']+"</a>   <br>   <button class=\"btn-success\" style=\"float:left; margin-left:1.2em\" >Enviar bono</button>        </div>        </form>        </div>        </div>        </div>        </div></li>"
+
+      //}
+      //console.log(str);
+    }
+    collapses += "</ul>";
+    document.getElementById('hideThis').innerHTML = collapses;
+  });
+}
+
+
+
+ 
+
+
+
 function verAmigos() {
 
   var uToken = getUserToken();
