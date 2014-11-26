@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  * REST Web Service
@@ -38,8 +39,11 @@ public class Login {
      */
     @GET
     @Produces("application/json")
-    public String getJson() {
+    public String getJson(@QueryParam("email") String token) {
         //TODO return proper representation obje
+        System.out.println("True");
+        System.out.println("Token FB: " + token);
+        
         return "";
     }
 

@@ -10,21 +10,23 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.api.services.plus.*;
+import com.google.api.services.plus.model.Activity;
+import com.google.api.services.plus.model.ActivityFeed;
 import com.google.api.services.plus.model.PeopleFeed;
 import com.google.api.services.plus.model.Person;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * REST Web Service
@@ -49,7 +51,7 @@ public class GFriendsResource {
      */
     @GET
     @Produces("application/json")
-    public String getJson(@QueryParam("token") String token) {
+    public String getJson() throws IOException {
         //TODO
         HttpTransport httpTransport = new UrlFetchTransport();
         JsonFactory jsonFactory = new JacksonFactory();
@@ -59,20 +61,27 @@ public class GFriendsResource {
         
         String res = "";
         
+        System.out.println("Hello");
         
-        
-        try 
-        {
-            PeopleFeed friends = plus.people().list(token, "visible").execute();
+       
+            //Plus.People.List listPeople = plus.people().list("me", "visible");
+            //PeopleFeed friends = listPeople.execute();
+            
+            //PeopleFeed friends = plus.people().list(token, "visible").execute();
+            
+            ActivityFeed myActivityFeed = plus.activities().search("Google").execute();
+            List<Activity> myActivities = myActivityFeed.getItems();
+            System.out.println(myActivities.size());
+           
+            /*
             List<Person> friendsList = friends.getItems();
             for (int i = 0; i < friendsList.size(); i++)
             {
                 Person p = friendsList.get(i);
                 res += p.getDisplayName() + "\n";
             }
-        } catch (IOException ex) {
-            res = "nope";
-        }
+            */
+       
         
         return res;
     }

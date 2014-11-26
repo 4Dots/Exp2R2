@@ -90,5 +90,8 @@ public class Metodos {
         return lista;
     }
     
+    public void buscarAmigosEnGPlus(){
+        
+    }
     
 }
