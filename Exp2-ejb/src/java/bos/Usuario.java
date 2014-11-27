@@ -89,6 +89,16 @@ public class Usuario
         this.amigosEnApp = nAmigosEnApp;
         this.bonosComprados = new ArrayList();
     }
+    
+    public Usuario(ArrayList<LikeU> likes, String ID, String name, ArrayList<Friend> nAmigosEnApp, boolean prueba)
+    {
+        this.likes = likes;
+        this.ID = ID;
+        this.name = name;
+        this.amigosEnApp = nAmigosEnApp;
+        this.bonosComprados = new ArrayList();
+    
+    }
 
     //Metodos
     @XmlTransient

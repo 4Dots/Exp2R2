@@ -6,15 +6,18 @@
 
 package Rest;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
+import Beans.Metodos;
+import bos.Usuario;
+import java.util.ArrayList;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * REST Web Service
@@ -39,10 +42,15 @@ public class Login {
      */
     @GET
     @Produces("application/json")
-    public String getJson(@QueryParam("token") String token) {
+    public String getJson(@QueryParam("id") String id, @QueryParam("nombre") String nombre) {
         //TODO return proper representation object
-        System.out.println("True");
-        System.out.println("Token FB: " + token);
+      
+        Metodos met = new Metodos();
+        ArrayList amigos =  met.buscarAmigosFB(id);
+        ArrayList likes = met.buscarLikesFB(id);
+        Usuario u = new Usuario(likes, id, nombre, amigos);
+        met.guardarUsuario(u);
+        
         
         return "";
     }

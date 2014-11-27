@@ -7,8 +7,10 @@
 package Beans;
 
 import static Beans.LoginBean.getLoginBeanIns;
+import Servicios.IServicioPersistenciaLocal;
 import Servicios.ServicioMail;
 import Servicios.ServicioPersistenciaNoSql;
+import Servicios.ServicioPersistenciaSql;
 import static Servlets.MailServlet.ALG_SIM;
 import bos.Bono;
 import bos.Seguridad;
@@ -57,7 +59,7 @@ public class Metodos {
             
         }
         
-        Usuario usu = LoginBean.getInstance().getUser();
+        Usuario usu = LoginBean.getInstance().conseguirUsuario();
         System.out.println(usu.getName());
         Tienda tienda = new Tienda(tiendaN);
         
@@ -77,8 +79,11 @@ public class Metodos {
     
     public ArrayList verHistorial(){
         
-         LoginBean lb = getLoginBeanIns();
-        Usuario u = lb.buscarUsuario();
+        //LoginBean lb = getLoginBeanIns();
+        //Usuario u = lb.buscarUsuario();
+        
+        Usuario u = LoginBean.getInstance().conseguirUsuario();
+        
         
         ServicioPersistenciaNoSql spnsql = new ServicioPersistenciaNoSql();
         
@@ -133,4 +138,34 @@ public class Metodos {
     return newAccessToken;
 }
     */
+    
+    public ArrayList buscarAmigosFB(String ID){
+        ArrayList amigos = new ArrayList();
+        ServicioPersistenciaSql sql = new ServicioPersistenciaSql();
+        try{
+        amigos = sql.buscarAmigosPorId(ID);
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return amigos;
+        
+    }
+    
+    public ArrayList buscarLikesFB(String ID){
+        ArrayList likes = new ArrayList();
+        ServicioPersistenciaSql sql = new ServicioPersistenciaSql();
+        try{
+        likes = sql.buscarLikesPorId(ID);
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return likes;
+        
+    }
+    
+    public void guardarUsuario(Usuario u){
+        LoginBean.getInstance().cambiarUsuario(u);
+    }
 }

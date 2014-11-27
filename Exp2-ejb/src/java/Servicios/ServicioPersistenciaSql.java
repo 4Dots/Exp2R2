@@ -110,4 +110,65 @@ public class ServicioPersistenciaSql {
             ex.printStackTrace();
         }
     }
+    
+    public ArrayList buscarAmigosPorId(String id)throws ClassNotFoundException{
+        
+        ArrayList amigos = new ArrayList();
+        
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost/Prueba;create=true;user=salas;password=admin");
+            conn.setSchema("SALAS");
+            Statement s = conn.createStatement();
+           
+            s.executeQuery("SELECT * FROM USUARIO_USUARIO JOIN USUARIO ON USUARIO.ID = USUARIO_USUARIO.AMIGOS_ID WHERE USUARIO_ID='"+id+"'");
+            
+            ResultSet rs = s.getResultSet();
+            
+            while(rs.next()){
+                String nombreAmigo = rs.getString("NOMBRE");
+                
+                amigos.add(nombreAmigo);
+                
+            }
+            conn.close();
+            
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return amigos;
+    }
+    
+    
+    public ArrayList buscarLikesPorId(String id)throws ClassNotFoundException{
+        
+        ArrayList likes = new ArrayList();
+        
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        
+        try{
+            Connection conn = DriverManager.getConnection("jdbc:derby://localhost/Prueba;create=true;user=salas;password=admin");
+            conn.setSchema("SALAS");
+            Statement s = conn.createStatement();
+           
+            s.executeQuery("SELECT * FROM USUARIO_LIKEU WHERE USUARIO_ID='"+id+"'");
+            
+            ResultSet rs = s.getResultSet();
+            
+            while(rs.next()){
+                String nombreTienda = rs.getString("LIKES_NAME");
+                
+                likes.add(nombreTienda);
+                
+            }
+            conn.close();
+            
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return likes;
+    }
 }

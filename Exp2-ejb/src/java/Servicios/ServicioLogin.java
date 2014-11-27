@@ -102,6 +102,14 @@ public class ServicioLogin {
         return buscarUsuario();
     }
     
+    public void cambiarUsuario(Usuario usu){
+        u = usu;
+    }
+    
+    public Usuario conseguirUsuario(){
+        return u;
+    }
+    
     public Usuario buscarUsuario(){
         Usuario usu = null;
         ArrayList<LikeU> nlik = new ArrayList();
