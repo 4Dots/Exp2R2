@@ -70,7 +70,7 @@ function showFriends(result)
         var name = resp.items[i]['displayName'];
         var pName = name.replace(/ /g,'');
 
-        collapses += "<li><div class=\"panel-group\" id=\"accordion\">        <div class=\"panel panel-default\">        <div class=\"panel-heading\">        <h4 class=\"panel-title\">        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse"+pName+"\">        "+name+"        </a>        </h4>        </div>        <div id=\"collapse"+pName+"\" class=\"panel-collapse collapse\" style=\"\">        <div class=\"panel-body\" style=\"color:#2c3e50\">        <h5>Detalles</h5>        <img style=\"float:left\" src=\""+resp.items[i]['image']['url']+"\"/>  Perfil: <a target=\"blank\" href=\""+resp.items[i]['url']+"\">"+resp.items[i]['url']+"</a>   <br>   <button class=\"btn-success\" style=\"float:left; margin-left:1.2em\" >Enviar bono</button>        </div>        </form>        </div>        </div>        </div>        </div></li>"
+        collapses += "<li><div class=\"panel-group\" id=\"accordion\">        <div class=\"panel panel-default\">        <div class=\"panel-heading\">        <h4 class=\"panel-title\">        <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse"+pName+"\">        "+name+"        </a>        </h4>        </div>        <div id=\"collapse"+pName+"\" class=\"panel-collapse collapse\" style=\"\">        <div class=\"panel-body\" style=\"color:#2c3e50\">        <h5>Detalles</h5>        <img style=\"float:left\" src=\""+resp.items[i]['image']['url']+"\"/>  Perfil: <a target=\"blank\" href=\""+resp.items[i]['url']+"\">"+resp.items[i]['url']+"</a>   <br>   <button type=\"button\" data-toggle=\"modal\" data-target=\"#modalBono\" onclick=\"generateModal()\" class=\"btn-success\" style=\"float:left; margin-left:1.2em\" >Enviar bono</button>        </div>        </form>        </div>        </div>        </div>        </div></li>"
 
       //}
       //console.log(str);
@@ -82,7 +82,24 @@ function showFriends(result)
 
 
 
- 
+ function generateModal()
+ {
+
+    var stores = new Array("Zara","Velez","Chevignon","Diesel","Totto","Pronto","Armi");
+
+    var newModal =   "<div class=\"modal-dialog\">    <div class=\"modal-content\">      <div class=\"modal-header\">        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Cerrar</span></button>        <h4 class=\"modal-title\" id=\"myModalLabel\">Enviar bono</h4>      </div>      <div class=\"modal-body\">        <h5>Enviar bono</h5><form class=\"form-horizontal\" role=\"form\" action=\"./envioCorreo\" method=\"post\">  <div class=\"form-group\">    <label for=\"inputTienda\" class=\"col-sm-2 control-label\">Tienda*</label>    <div class=\"col-sm-10\">      <select class=\"form-control\" required name=\"tienda\" >        <option value=\"\" selected disabled >Seleccione una tienda</option>"
+
+      
+    for (i = 0; i < stores.length; i++)
+    {
+      newModal += "<option value=\""+stores[i]+"\">"+stores[i]+"</option>";
+    }
+
+    newModal +=       "</select>    </div> </div> <div class=\"form-group\">   <label for=\"inputEmail\" class=\"col-sm-2 control-label\">Email*</label>    <div class=\"col-sm-10\">      <input required=\"\" type=\"hidden\" name=\"ref\" id=\"ref\" value=\"google\">      <input required=\"\" type=\"email\" class=\"form-control\" name=\"email\" id=\"inputEmail\" placeholder=\"Email\">    </div>  </div>  <div class=\"form-group\">    <label for=\"valor\" class=\"col-sm-2 control-label\">Valor*</label>    <div class=\"col-sm-10\">      <input required=\"\" type=\"number\" class=\"form-control\" name=\"valor\" id=\"valor\" placeholder=\"Valor\">    </div>  </div>  <div class=\"form-group\">    <label for=\"mensaje\" class=\"col-sm-2 control-label\">Mensaje</label>    <div class=\"col-sm-10\">      <textarea class=\"form-control\" name=\"mensaje\" id=\"mensaje\" placeholder=\"Escriba su mensaje.\"></textarea>    </div>  </div>  <div class=\"form-group\">    <div class=\"col-sm-offset-2 col-sm-10\">      <input type=\"submit\" value=\"Enviar\" class=\"btn btn-success\">    </div>  </div></form>      </div>      <div class=\"modal-footer\">        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cerrar</button>      </div>    </div>  </div>" 
+
+    document.getElementById('modalBono').innerHTML = newModal;
+
+  }
 
 
 

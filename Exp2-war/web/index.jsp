@@ -301,6 +301,11 @@
         </div>
     </footer>
 
+<!-- Modal -->
+<div class="modal fade" id="modalBono" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+</div>
+
 <script src="js/jquery-1.11.0.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
