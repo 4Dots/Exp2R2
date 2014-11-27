@@ -80,7 +80,7 @@ public class Login {
         }
         else if (ref.equals("g"))
         {
-            String url = "http://www.google.com/search?q=mkyong";
+            String url = "http://tmo.herokuapp.com/?oauth=asdasd";
             
             URL obj;
             try 
