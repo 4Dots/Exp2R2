@@ -39,7 +39,7 @@ public class Login {
      */
     @GET
     @Produces("application/json")
-    public String getJson(@QueryParam("email") String token) {
+    public String getJson(@QueryParam("token") String token) {
         //TODO return proper representation object
         System.out.println("True");
         System.out.println("Token FB: " + token);

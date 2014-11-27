@@ -30,6 +30,19 @@ public class MailServlet extends HttpServlet {
         
         PrintWriter pw = response.getWriter();
         System.out.println("Llego a MailServlet");
+        String ref = request.getParameter("ref");
+        String tiendaN = "";
+        if(ref==null){
+           tiendaN = request.getParameter("tienda");
+        }
+        else{
+           String[] itemCombo = request.getParameterValues("tienda");
+           
+           for(int i=0; i < itemCombo.length; i++){
+               
+               tiendaN = itemCombo[i];
+           }        
+        }
         
         String correo = request.getParameter("email");
         
@@ -37,7 +50,6 @@ public class MailServlet extends HttpServlet {
         double valorD = Double.parseDouble(valor);
         
         String mensaje = request.getParameter("mensaje");
-        String tiendaN = request.getParameter("tienda");
         String codBase = UUID.randomUUID().toString();
         
         byte[] codigo = null;

@@ -14,8 +14,15 @@ import bos.Bono;
 import bos.Seguridad;
 import bos.Tienda;
 import bos.Usuario;
+import facebook4j.Facebook;
+import facebook4j.RawAPIResponse;
+import facebook4j.auth.AccessToken;
+import facebook4j.conf.Configuration;
+import facebook4j.conf.ConfigurationBuilder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -93,5 +100,37 @@ public class Metodos {
     public void buscarAmigosEnGPlus(){
         
     }
-    
+   /* 
+    private AccessToken refreshToken(Facebook facebook, AccessToken currentToken) throws Exception {
+        
+    ConfigurationBuilder confBuilder = new ConfigurationBuilder();
+
+    confBuilder.setDebugEnabled(APIConfiguration.DEBUG_ENABLED);
+    confBuilder.setOAuthAppId(APIConfiguration.APP_ID);
+    confBuilder.setOAuthAppSecret(APIConfiguration.APP_SECRET);
+    confBuilder.setUseSSL(APIConfiguration.USE_SSL);
+    confBuilder.setJSONStoreEnabled(APIConfiguration.JSON_STORE_ENABLED);
+
+
+    Configuration configuration = confBuilder.build();
+        
+    String clientId = configuration.getString(ConfigurationKeys.SOCIAL_FACEBOOK_CLIENTID);
+    String clientSecret = configuration.getString(ConfigurationKeys.SOCIAL_FACEBOOK_CLIENTSECRET);
+
+    Map<String, String> params = new HashMap<String, String>();
+    params.put("client_id", clientId);
+    params.put("client_secret", clientSecret);
+    params.put("grant_type", "fb_exchange_token");
+    params.put("fb_exchange_token", currentToken.getToken());
+
+    RawAPIResponse apiResponse = facebook.callGetAPI("/oauth/access_token", params);
+
+    String response = apiResponse.asString();
+    AccessToken newAccessToken = new AccessToken(response);
+
+    facebook.setOAuthAccessToken(newAccessToken);
+
+    return newAccessToken;
+}
+    */
 }
