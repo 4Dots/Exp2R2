@@ -6,6 +6,7 @@
 
 package Rest;
 
+import Beans.LoginBean;
 import Beans.Metodos;
 import bos.Usuario;
 import java.util.ArrayList;
@@ -44,15 +45,18 @@ public class Login {
     @Produces("application/json")
     public String getJson(@QueryParam("id") String id, @QueryParam("nombre") String nombre) {
         //TODO return proper representation object
+        System.out.println("ID: "+ id);
+        System.out.println("Nombre: " + nombre);
       
         Metodos met = new Metodos();
         ArrayList amigos =  met.buscarAmigosFB(id);
         ArrayList likes = met.buscarLikesFB(id);
         Usuario u = new Usuario(likes, id, nombre, amigos);
         met.guardarUsuario(u);
-        
-        
-        return "";
+        Usuario usu = LoginBean.getInstance().conseguirUsuario();
+        System.out.println("Usuario creado: "+usu.getID());
+        System.out.println("Llego a REST");
+        return "true";
     }
 
     /**
